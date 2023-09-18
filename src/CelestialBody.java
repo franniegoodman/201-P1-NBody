@@ -125,19 +125,38 @@ public class CelestialBody {
 	}
 
 	public double calcNetForceExertedByX(CelestialBody[] bodies) {
-		// TODO: complete method
 		double sum = 0.0;
+		for (CelestialBody b : bodies){
+			if (! b.equals(this)){
+				sum += calcForceExertedByX(b);
+			}
+		}
 		return sum;
 	}
 
 	public double calcNetForceExertedByY(CelestialBody[] bodies) {
 		double sum = 0.0;
+		for (CelestialBody b : bodies){
+			if (! b.equals(this)){
+				sum += calcForceExertedByY(b);
+			}
+		}
 		return sum;
 	}
 
 	public void update(double deltaT, 
 			           double xforce, double yforce) {
-		// TODO: complete method
+		double a_x = xforce/myMass;
+		double a_y = yforce/myMass;
+		double nvx = myXVel + deltaT * a_x;
+		double nvy = myYVel + deltaT * a_y;
+		double nx = myXPos + deltaT * nvx;
+		double ny = myYPos + deltaT * nvy;
+		myXPos = nx;
+		myYPos = ny;
+		myXVel = nvx;
+		myYVel = nvy;
+
 	}
 
 	/**
